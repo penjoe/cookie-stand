@@ -8,48 +8,35 @@
 var storeSeattle = {
 
   name: 'Seattle' ,
-  minHourlyCustomer: 23 ,
-  maxHourlyCustomer: 65 ,
-  avgCookiesHour: 6.3 ,
-  hoursOpenPerDay: 14 ,
-  // cookiesAtEachHour: [],
+  minCustomer: 23 ,
+  maxCustomer: 65 ,
+  avgCookies: 6.3 ,
+  hoursOpen: 14 ,
   
-  //This function calculates a random number for customers per hour then multiplies that by the average cookies per hour for a total cookies needed per hour and puts both of those values into an array.
+  //This method gives a random number for customers per hour.
+  randomCustomer: function() {
 
-  randomCustomerHour: function() {
-
-    var customersPerHour = Math.floor(Math.random() * (this.maxHourlyCustomer - this.minHourlyCustomer + 1) + this.minHourlyCustomer);
-    var cookiesPerHour = Math.floor(customersPerHour * this.avgCookiesHour);
-    var cookiesAndCustomersPerHour = [customersPerHour, cookiesPerHour]
-    // console.log(customersAndCookiesPerHour);
-    return cookiesAndCustomersPerHour;
+      return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
   } ,
+  //This method multiples the customers per hour by the average cookie sales.
+  cookieSales: function() {
 
-  //This function will take customers per hour and cookies per hour from an array and repeat 14 times for hours open per day.
+      return Math.floor(this.randomCustomer() * this.avgCookies);
+  } ,
+  //This method stores the customers per hour and cookies per hour and stores them in an array. That array is looped through 14 times and returns an array with 14 dual values, one pair for each hour open.
+  salesArray: function() {
+      
+      var totalArray = [];
 
-    salesTotalPerDay: function() {
-
-      var customerCookieFinalSum = this.randomCustomerHour();
-      var totalCookieIteration = 0;
-      var totalCookie = [];
-      var totalCustomerIteration = 0; 
-      var totalCustomer = [];
-
-        for (var i = 0; i < this.hoursOpenPerDay; i++) {
+      for (index = 0; i < this.hoursOpen; i++) {
           
-          totalCustomer.push(customerCookieFinalSum[0]);
-          totalCustomerIteration = totalCustomerIteration + customerCookieFinalSum[0];
-          totalCookie.push(customerCookieFinalSum[1]);
-          totalCookieIteration = totalCookieIteration + customerCookieFinalSum[1];
-          return [totalCustomer, totalCookie];
-
       }
-    } ,
+
+      return totalArray;
+      // console.log(totalArray)
+  },
 }
 
-// console.log(storeSeattle.randomCustomerHour());
-// console.log(customersAndCookiesPerHour)
-console.log(storeSeattle.salesTotalPerDay());
 
 // Object #2 for Tokyo store
 var storeTokyo = {
