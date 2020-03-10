@@ -6,44 +6,49 @@
 
 // Object #1 for Seattle store
 var storeSeattle = {
+
   name: 'Seattle' ,
   minHourlyCustomer: 23 ,
   maxHourlyCustomer: 65 ,
   avgCookiesHour: 6.3 ,
   hoursOpenPerDay: 14 ,
-  cookiesAtEachHour: [],
+  // cookiesAtEachHour: [],
+  
   //This function calculates a random number for customers per hour then multiplies that by the average cookies per hour for a total cookies needed per hour and puts both of those values into an array.
+
   randomCustomerHour: function() {
+
     var customersPerHour = Math.floor(Math.random() * (this.maxHourlyCustomer - this.minHourlyCustomer + 1) + this.minHourlyCustomer);
     var cookiesPerHour = Math.floor(customersPerHour * this.avgCookiesHour);
-    var customersAndCookiesPerHour = [customersPerHour, cookiesPerHour]
-    console.log(customersAndCookiesPerHour);
-    return customersAndCookiesPerHour;
+    var cookiesAndCustomersPerHour = [customersPerHour, cookiesPerHour]
+    // console.log(customersAndCookiesPerHour);
+    return cookiesAndCustomersPerHour;
   } ,
 
   //This function will take customers per hour and cookies per hour from an array and repeat 14 times for hours open per day.
-  salesTotalPerDay: function() {
-    var totalCookieIteration = 0;
-    var totalCookie = [];
-    var totalCustomerIteration = 0; 
-    var totalCustomer = [];
 
-      for (var i = 0; i < this.hoursOpenPerDay; i++) {
-        // console.log(customersAndCookiesPerHour, totalCustomer)
-        this.cookiesAtEachHour.push(this.randomCustomerHour());
-        // var customersAndCookiesPerHour = this.randomCustomerHour();
-        totalCustomer.push(customersAndCookiesPerHour[0]);
-        totalCustomerIteration = totalCustomerIteration +
-        customersAndCookiesPerHour[0];
-        totalCookie.push(customersAndCookiesPerHour[1]);
-        totalCookieIteration = totalCookieIteration + customersAndCookiesPerHour[1];
-        // console.log(totalCookieIteration, totalCustomerIteration);
-        // return [totalCookie, totalCustomer];
-    }
-  },
+    salesTotalPerDay: function() {
+
+      var customerCookieFinalSum = this.randomCustomerHour();
+      var totalCookieIteration = 0;
+      var totalCookie = [];
+      var totalCustomerIteration = 0; 
+      var totalCustomer = [];
+
+        for (var i = 0; i < this.hoursOpenPerDay; i++) {
+          
+          totalCustomer.push(customerCookieFinalSum[0]);
+          totalCustomerIteration = totalCustomerIteration + customerCookieFinalSum[0];
+          totalCookie.push(customerCookieFinalSum[1]);
+          totalCookieIteration = totalCookieIteration + customerCookieFinalSum[1];
+          return [totalCustomer, totalCookie];
+
+      }
+    } ,
 }
 
 // console.log(storeSeattle.randomCustomerHour());
+// console.log(customersAndCookiesPerHour)
 console.log(storeSeattle.salesTotalPerDay());
 
 // Object #2 for Tokyo store
