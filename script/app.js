@@ -5,71 +5,65 @@
 // }
 
 // Object #1 for Seattle store
-var storeSeattle = {
+
+var seattleStore = {
 
   name: 'Seattle' ,
   minCustomer: 23 ,
   maxCustomer: 65 ,
   avgCookies: 6.3 ,
   hoursOpen: 14 ,
+  totalCustomers: [],
+  totalCookies: [],
+  customerSum: 0,
+  cookieSum: 0,
+  hours: ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'],
   
-  //This method gives a random number for customers per hour.
+  //This method calculates a random number for customers per hour and multiples that by avg. cookie sales and returns and array with those two values.
   randomCustomer: function() {
 
-      return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
+    var customers = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
+    // console.log(customers)
+    var cookies = Math.floor(customers * this.avgCookies);
+    // console.log(cookies);
+    var hourlyTotals = [customers, cookies];
+    return hourlyTotals;
+    
   } ,
-  //This method multiples the customers per hour by the average cookie sales.
-  cookieSales: function() {
 
-      return Math.floor(this.randomCustomer() * this.avgCookies);
-  } ,
-  //This method stores the customers per hour and cookies per hour and stores them in an array. That array is looped through 14 times and returns an array with 14 dual values, one pair for each hour open.
-  salesArray: function() {
-      
-      var totalArray = [];
+  //This method will take the values from the 'randomCustomer()' method and runs them through a loop for each hour the store is open and stores them in an array. Loops through and adds the sum of those values. The result is 2 arrays, one for total customers and one for total cookie sales, and two sums for their respective types.
+  salesData: function() {
 
-      for (index = 0; i < this.hoursOpen; i++) {
+      for (var i = 0; i < this.hoursOpen; i++) {
+        var salesTotals = this.randomCustomer();
+        
+          this.totalCustomers.push(salesTotals[0]);
+          this.customerSum = (this.customerSum + salesTotals[0]);
           
+          this.totalCookies.push(salesTotals[1]);
+          this.cookieSum = (this.cookieSum + salesTotals[1]);
       }
-
-      return totalArray;
-      // console.log(totalArray)
   },
+  //This method will create a list and write the stored data into a list.
+  write: function() {
+    var listEl = document.getElementById('list');
+    var itemEl = document.createElement('li');
+    var nameEl = document.createElement('p');
+    nameEl.textContent = this.name;
+    itemEl.appendChild(nameEl);
+    listEl.appendChild(itemEl);
+
+
+  }
 }
+seattleStore.salesData();
+seattleStore.write();
 
 
-// Object #2 for Tokyo store
-var storeTokyo = {
-  name: 'Tokyo' ,
-  minHourlyCustomer: 3 ,
-  maxHourlyCustomer: 24 ,
-  avgCookiesHour: 1.2 ,
+console.log(seattleStore.salesData())
+console.log(seattleStore.totalCustomers);
+console.log(seattleStore.totalCookies);
+console.log(seattleStore.customerSum);
+console.log(seattleStore.cookieSum);
 
-}
 
-// Object #3 for Dubai store
-var storeDubai = {
-  name: 'Dubai' ,
-  minHourlyCustomer: 11 ,
-  maxHourlyCustomer: 38 ,
-  avgCookiesHour: 3.7 ,
-
-}
-
-// Object #4 for Paris store
-var storeParis = {
-  name: 'Paris' ,
-  minHourlyCustomer: 20 ,
-  maxHourlyCustomer: 38 ,
-  avgCookiesHour: 2.3 ,
-
-}
-
-// Object #5 for Lima store
-var storeLima = {
-  name: 'Lima' ,
-  minHourlyCustomer: 2 ,
-  maxHourlyCustomer: 16 ,
-  avgCookiesHour: 4.6 ,
-
-}
