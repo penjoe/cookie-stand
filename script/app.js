@@ -47,12 +47,23 @@ var seattleStore = {
   //This method will create a list and write the stored data into a list.
   write: function() {
     var listEl = document.getElementById('list');
+    var salesList = document.createElement('ul');
     var itemEl = document.createElement('li');
     var nameEl = document.createElement('p');
-    nameEl.textContent = this.name;
-    itemEl.appendChild(nameEl);
-    listEl.appendChild(itemEl);
+      nameEl.textContent = this.name;
+      itemEl.appendChild(nameEl);
+      listEl.appendChild(itemEl);
+      listEl.appendChild(salesList);
 
+    for (var i = 0; i < this.totalCookies.length; i++) {
+      var hourEl = document.createElement('li');
+      salesList.appendChild(hourEl);
+      hourEl.textContent = this.totalCookies[i];
+    }
+
+    var sumEl = document.createElement('li');
+    sumEl.textContent = 'total : ' + this.cookieSum;
+    salesList.appendChild(sumEl);
 
   }
 }
@@ -65,5 +76,4 @@ console.log(seattleStore.totalCustomers);
 console.log(seattleStore.totalCookies);
 console.log(seattleStore.customerSum);
 console.log(seattleStore.cookieSum);
-
 
