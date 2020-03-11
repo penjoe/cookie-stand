@@ -1,5 +1,33 @@
 'use strict'
 
+
+//This constructor function will create a template from which I can make any number of store locations by creating an instance for each desired store
+
+function NewStore(name, minCustomer, maxCustomer, avgCookies, hoursOpen, totalCustomers, totalCookies, customerSum, cookieSum, hours) {
+
+  //Properties for objects to be created, defined when creating object instance
+  this.name = name;
+  this.minCustomer = minCustomer;
+  this.maxCustomer = maxCustomer;
+  this.avgCookies = avgCookies;
+  this.hoursOpen = hoursOpen;
+  this.totalCustomers = totalCustomers;
+  this.totalCookies = totalCookies;
+  this.customerSum = customerSum;
+  this.cookieSum = cookieSum;
+  this.hours = hours;
+  this.randomCustomer = function(){
+    
+
+  };
+  this.salesData = function() {
+
+  };
+  this.write = function() {
+
+  };
+}
+
 // Object #1 for Seattle store
 
 var seattleStore = {
