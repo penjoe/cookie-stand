@@ -139,7 +139,7 @@ function createTableFooter() {
   }
 
   footerCell = document.createElement('td');
-  footerCell.textContent = dailySum;
+  footerCell.textContent = ('Company Total: ' + dailySum);
   footerRow.appendChild(footerCell);
   footer.appendChild(footerRow);
   
