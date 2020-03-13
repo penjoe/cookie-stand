@@ -106,7 +106,7 @@ function createTableHeader() {
 
   }
 
-  headerCell.textContent = 'Hourly Sales Totals';
+  headerCell.textContent = 'Store Sales Totals';
   header.appendChild(headerRow);
   headerRow.appendChild(headerCell);
 
@@ -115,24 +115,34 @@ function createTableHeader() {
 //Adds a footer to the table with hourly totals and tracks a brand total cookies sold.
 function createTableFooter() {
   var dailySum = 0;
-  var hourlySum = 0;
   var footer = document.getElementById('sales-table');
   var footerRow = document.createElement('tr');
   var footerCell = document.createElement('td');
-  cell.textContent = 'Hourly Sales Total';
-  footer.appendChild(footerRow);
+  footerCell.textContent = 'Hourly Sales Total';
+  // footer.appendChild(footerRow);
   footerRow.appendChild(footerCell)
 
   for (var i = 0; i < hoursOpen; i++) {
 
-
+    footerCell = document.createElement('td');
+    var hourlySum = 0;
     for (var j = 0; j < storeList.length; j++) {
 
+      hourlySum = hourlySum + storeList[j].cookiesPerHour[i];
+
     }
+
+    footerCell.textContent = hourlySum;
+    footerRow.appendChild(footerCell)
+    dailySum = dailySum + hourlySum;
+
   }
 
+  footerCell = document.createElement('td');
+  footerCell.textContent = dailySum;
+  footerRow.appendChild(footerCell);
+  footer.appendChild(footerRow);
   
-
 }
 //These are the instances for each individual store created from the constructor function using the 'new' keyword
 createTableHeader();
