@@ -20,6 +20,22 @@ header{
   text-align: center;
 }
 
+#store {
+  background-color: rgb(184, 184, 184);
+  margin-top: 25px;
+  width: 400px;
+  height: 150px;
+}
+
+#text-inputs {
+  
+}
+
+.store-input {
+  display: block;
+  margin: 10px;
+}
+
 #sales-table {
   display: inline-block;
   margin: 20px auto;
