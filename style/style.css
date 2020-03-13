@@ -1,9 +1,23 @@
 body {
-  background-color: lightslategrey;
+  background-color: salmon;
+}
+
+img {
+  display: block;
+  margin: 10px auto;
+}
+
+nav {
+  
+}
+
+ul {
+  list-style-type: none;
 }
 
 header{
-  background-color: salmon;
+  background-color: white;
+  text-align: center;
 }
 
 #sales-table {
@@ -15,11 +29,19 @@ table {
   font-size:16px;
   display: inline-block;
   margin: 20px auto;
+  border:1px solid black;
 }
+
 tr {
   padding: 20px;
 }
+
+td:nth-child(odd) {
+  background-color: lightgrey;
+}
+
 td {
-  background-color: rgb(250, 196, 179);
+  background-color: grey;
   padding: 10px;
+  border:1px solid black;
 }
