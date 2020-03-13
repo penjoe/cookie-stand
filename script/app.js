@@ -1,336 +1,154 @@
 'use strict'
 
-// Object #1 for Seattle store
+//Array that will hold all store locations for easier reference
+var storeList = [];
 
-var seattleStore = {
+//Number of hours each store is open
+var hoursOpen = 14;
 
-  name: 'Seattle' ,
-  minCustomer: 23 ,
-  maxCustomer: 65 ,
-  avgCookies: 6.3 ,
-  hoursOpen: 14 ,
-  totalCustomers: [],
-  totalCookies: [],
-  customerSum: 0,
-  cookieSum: 0,
-  hours: ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'],
+//Array of strings for each hour the store is open that will be used to write onto the table header cells 
+var hoursOfOperation = ['6:00am','7:00am','8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm'];
+
+//This constructor function will create a template from which I can make any number of store locations by creating an instance for each desired store
+
+function NewStore(storeName, minCustomer, maxCustomer, avgCookies) {
+
+  //Properties for objects to be created, defined when creating object instance
+  this.storeName = storeName;
+  this.minCustomer = minCustomer;
+  this.maxCustomer = maxCustomer;
+  this.avgCookies = avgCookies;
   
-  //This method calculates a random number for customers per hour and multiples that by avg. cookie sales and returns and array with those two values.
-  randomCustomer: function() {
+  //This is all of my store sales metrics stored in an object
+  var hourlyData = this.salesData();
 
-    var customers = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-    // console.log(customers)
-    var cookies = Math.floor(customers * this.avgCookies);
-    // console.log(cookies);
-    var hourlyTotals = [customers, cookies];
-    return hourlyTotals;
-    
-  } ,
+  this.customersPerHour = hourlyData.customerData;        //customers per hour
+  this.totalCustomersServed = hourlyData.customerTotals;  //customer sum
+  this.cookiesPerHour = hourlyData.cookieData;            //cookies per hour
+  this.totalCookiesSold = hourlyData.cookieTotals;        //cookie sum
 
-  //This method will take the values from the 'randomCustomer()' method and runs them through a loop for each hour the store is open and stores them in an array. Loops through and adds the sum of those values. The result is 2 arrays, one for total customers and one for total cookie sales, and two sums for their respective types.
-  salesData: function() {
-
-      for (var i = 0; i < this.hoursOpen; i++) {
-        var salesTotals = this.randomCustomer();
-        
-          this.totalCustomers.push(salesTotals[0]);
-          this.customerSum = (this.customerSum + salesTotals[0]);
-          
-          this.totalCookies.push(salesTotals[1]);
-          this.cookieSum = (this.cookieSum + salesTotals[1]);
-      }
-  },
-  //This method will create a list and write the stored data into a list.
-  write: function() {
-    var listEl = document.getElementById('list');
-    var salesList = document.createElement('ul');
-    var itemEl = document.createElement('li');
-    var nameEl = document.createElement('p');
-      nameEl.textContent = this.name;
-      itemEl.appendChild(nameEl);
-      listEl.appendChild(itemEl);
-      listEl.appendChild(salesList);
-
-    //This loops through an writes to document the total cookies sold per hour into a list
-    for (var i = 0; i < this.totalCookies.length; i++) {
-      var hourEl = document.createElement('li');
-      salesList.appendChild(hourEl);
-      hourEl.textContent = this.totalCookies[i];
-    }
-
-    //This writes sum of all cookies to bottom of the list
-    var sumEl = document.createElement('li');
-    sumEl.textContent = 'total : ' + this.cookieSum;
-    salesList.appendChild(sumEl);
-
-  }
+  //Pushes each store to a global array for easy reference
+  storeList.push(this);
+  this.createTable();
 }
-seattleStore.salesData();
-seattleStore.write();
 
-// Object #2 for Tokyo Store
-var tokyoStore = {
+//Calculates hourly and total customers and hourly and total sales and store them in an array
+NewStore.prototype.salesData = function() {
 
-  name: 'Tokyo' ,
-  minCustomer: 3 ,
-  maxCustomer: 24 ,
-  avgCookies: 1.2 ,
-  hoursOpen: 14 ,
-  totalCustomers: [],
-  totalCookies: [],
-  customerSum: 0,
-  cookieSum: 0,
-  hours: ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'],
-  
-  //This method calculates a random number for customers per hour and multiples that by avg. cookie sales and returns and array with those two values.
-  randomCustomer: function() {
+  // var totals = this.randomCustomer();
+  var hourlyCustomers = [];
+  var hourlyCookies = [];
+  var customerSum = 0;
+  var cookieSum = 0;
 
-    var customers = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-    // console.log(customers)
-    var cookies = Math.floor(customers * this.avgCookies);
-    // console.log(cookies);
-    var hourlyTotals = [customers, cookies];
-    return hourlyTotals;
+  for (var i = 0; i < hoursOpen; i++) {
     
-  } ,
-
-  //This method will take the values from the 'randomCustomer()' method and runs them through a loop for each hour the store is open and stores them in an array. Loops through and adds the sum of those values. The result is 2 arrays, one for total customers and one for total cookie sales, and two sums for their respective types.
-  salesData: function() {
-
-      for (var i = 0; i < this.hoursOpen; i++) {
-        var salesTotals = this.randomCustomer();
-        
-          this.totalCustomers.push(salesTotals[0]);
-          this.customerSum = (this.customerSum + salesTotals[0]);
-          
-          this.totalCookies.push(salesTotals[1]);
-          this.cookieSum = (this.cookieSum + salesTotals[1]);
-      }
-  },
-  //This method will create a list and write the stored data into a list.
-  write: function() {
-    var listEl = document.getElementById('list');
-    var salesList = document.createElement('ul');
-    var itemEl = document.createElement('li');
-    var nameEl = document.createElement('p');
-      nameEl.textContent = this.name;
-      itemEl.appendChild(nameEl);
-      listEl.appendChild(itemEl);
-      listEl.appendChild(salesList);
-
-    for (var i = 0; i < this.totalCookies.length; i++) {
-      var hourEl = document.createElement('li');
-      salesList.appendChild(hourEl);
-      hourEl.textContent = this.totalCookies[i];
-    }
-
-    var sumEl = document.createElement('li');
-    sumEl.textContent = 'total : ' + this.cookieSum;
-    salesList.appendChild(sumEl);
-
+    //customers served per hour
+    var customersPerHour = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
+    hourlyCustomers.push(customersPerHour);
+    //cookies sold per hour
+    var cookiesPerHour = Math.floor(customersPerHour * this.avgCookies);
+    hourlyCookies.push(cookiesPerHour);
+    //total customers
+    customerSum = customerSum + customersPerHour;
+    //total cookies
+    cookieSum = cookieSum + cookiesPerHour;
+    
+  }
+  return {
+    customerData: hourlyCustomers,  //customers per hour
+    customerTotals: customerSum,    //customer sum
+    cookieData: hourlyCookies,      //cookies per hour
+    cookieTotals: cookieSum         //cookie sum
   }
 }
 
-tokyoStore.salesData();
-tokyoStore.write();
-
-// Object #3 for Dubai
-var dubaiStore = {
-
-  name: 'Dubai' ,
-  minCustomer: 11 ,
-  maxCustomer: 38 ,
-  avgCookies: 3.7 ,
-  hoursOpen: 14 ,
-  totalCustomers: [],
-  totalCookies: [],
-  customerSum: 0,
-  cookieSum: 0,
-  hours: ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'],
+//This method will create a table and populate it with the sales data for each store.
+NewStore.prototype.createTable = function() {
   
-  //This method calculates a random number for customers per hour and multiples that by avg. cookie sales and returns and array with those two values.
-  randomCustomer: function() {
+  //Variable storing the table elements
+  var tableEl = document.getElementById('sales-table');
+  var rowEl = document.createElement('tr');
+  var cellEl = document.createElement('td');
+  cellEl.textContent = this.storeName;
+  tableEl.appendChild(rowEl);
+  rowEl.appendChild(cellEl);
 
-    var customers = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-    // console.log(customers)
-    var cookies = Math.floor(customers * this.avgCookies);
-    // console.log(cookies);
-    var hourlyTotals = [customers, cookies];
-    return hourlyTotals;
-    
-  } ,
+  //This loops will create 14 cells per row
+  for (var cookiesSold = 0 ;  cookiesSold < this.cookiesPerHour.length ; cookiesSold++) {
 
-  //This method will take the values from the 'randomCustomer()' method and runs them through a loop for each hour the store is open and stores them in an array. Loops through and adds the sum of those values. The result is 2 arrays, one for total customers and one for total cookie sales, and two sums for their respective types.
-  salesData: function() {
-
-      for (var i = 0; i < this.hoursOpen; i++) {
-        var salesTotals = this.randomCustomer();
-        
-          this.totalCustomers.push(salesTotals[0]);
-          this.customerSum = (this.customerSum + salesTotals[0]);
-          
-          this.totalCookies.push(salesTotals[1]);
-          this.cookieSum = (this.cookieSum + salesTotals[1]);
-      }
-  },
-  //This method will create a list and write the stored data into a list.
-  write: function() {
-    var listEl = document.getElementById('list');
-    var salesList = document.createElement('ul');
-    var itemEl = document.createElement('li');
-    var nameEl = document.createElement('p');
-      nameEl.textContent = this.name;
-      itemEl.appendChild(nameEl);
-      listEl.appendChild(itemEl);
-      listEl.appendChild(salesList);
-
-    for (var i = 0; i < this.totalCookies.length; i++) {
-      var hourEl = document.createElement('li');
-      salesList.appendChild(hourEl);
-      hourEl.textContent = this.totalCookies[i];
-    }
-
-    var sumEl = document.createElement('li');
-    sumEl.textContent = 'total : ' + this.cookieSum;
-    salesList.appendChild(sumEl);
-
+    cellEl = document.createElement('td');
+    cellEl.textContent = this.cookiesPerHour[cookiesSold];
+    rowEl.appendChild(cellEl);
   }
+
+  //Adds daily totals to end column of table
+  cellEl = document.createElement('td');
+  cellEl.textContent = this.totalCookiesSold;
+  rowEl.appendChild(cellEl);
+
 }
 
-dubaiStore.salesData();
-dubaiStore.write();
-
-
-// Object #4 Paris
-var parisStore = {
-
-  name: 'Paris' ,
-  minCustomer: 20 ,
-  maxCustomer: 38 ,
-  avgCookies: 2.3 ,
-  hoursOpen: 14 ,
-  totalCustomers: [],
-  totalCookies: [],
-  customerSum: 0,
-  cookieSum: 0,
-  hours: ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'],
+//Adds a header to the table with an hour for each column. Hours are stored in a global array.
+function createTableHeader() {
+  var header = document.getElementById('sales-table');
+  var headerRow = document.createElement('tr');
+  var headerCell = document.createElement('td');
   
-  //This method calculates a random number for customers per hour and multiples that by avg. cookie sales and returns and array with those two values.
-  randomCustomer: function() {
+  headerRow.appendChild(headerCell);
 
-    var customers = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-    // console.log(customers)
-    var cookies = Math.floor(customers * this.avgCookies);
-    // console.log(cookies);
-    var hourlyTotals = [customers, cookies];
-    return hourlyTotals;
-    
-  } ,
+  //Loops through array with each hour open as a string and adds that string to a cell
+  for (var i = 0 ; i <= (hoursOfOperation.length) ; i++) {
 
-  //This method will take the values from the 'randomCustomer()' method and runs them through a loop for each hour the store is open and stores them in an array. Loops through and adds the sum of those values. The result is 2 arrays, one for total customers and one for total cookie sales, and two sums for their respective types.
-  salesData: function() {
-
-      for (var i = 0; i < this.hoursOpen; i++) {
-        var salesTotals = this.randomCustomer();
-        
-          this.totalCustomers.push(salesTotals[0]);
-          this.customerSum = (this.customerSum + salesTotals[0]);
-          
-          this.totalCookies.push(salesTotals[1]);
-          this.cookieSum = (this.cookieSum + salesTotals[1]);
-      }
-  },
-  //This method will create a list and write the stored data into a list.
-  write: function() {
-    var listEl = document.getElementById('list');
-    var salesList = document.createElement('ul');
-    var itemEl = document.createElement('li');
-    var nameEl = document.createElement('p');
-      nameEl.textContent = this.name;
-      itemEl.appendChild(nameEl);
-      listEl.appendChild(itemEl);
-      listEl.appendChild(salesList);
-
-    for (var i = 0; i < this.totalCookies.length; i++) {
-      var hourEl = document.createElement('li');
-      salesList.appendChild(hourEl);
-      hourEl.textContent = this.totalCookies[i];
-    }
-
-    var sumEl = document.createElement('li');
-    sumEl.textContent = 'total : ' + this.cookieSum;
-    salesList.appendChild(sumEl);
+    headerCell = document.createElement('td');
+    headerCell.textContent = hoursOfOperation[i];
+    headerRow.appendChild(headerCell);
 
   }
+
+  headerCell.textContent = 'Store Sales Totals';
+  header.appendChild(headerRow);
+  headerRow.appendChild(headerCell);
+
 }
 
-parisStore.salesData();
-parisStore.write();
+//Adds a footer to the table with hourly totals and tracks a brand total cookies sold.
+function createTableFooter() {
+  var dailySum = 0;
+  var footer = document.getElementById('sales-table');
+  var footerRow = document.createElement('tr');
+  var footerCell = document.createElement('td');
+  footerCell.textContent = 'Hourly Sales Total';
+  // footer.appendChild(footerRow);
+  footerRow.appendChild(footerCell)
 
+  for (var i = 0; i < hoursOpen; i++) {
 
-//Object #4 Lima
-var limaStore = {
+    footerCell = document.createElement('td');
+    var hourlySum = 0;
+    for (var j = 0; j < storeList.length; j++) {
 
-  name: 'Lima' ,
-  minCustomer: 2 ,
-  maxCustomer: 16 ,
-  avgCookies: 4.6 ,
-  hoursOpen: 14 ,
-  totalCustomers: [],
-  totalCookies: [],
-  customerSum: 0,
-  cookieSum: 0,
-  hours: ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'],
-  
-  //This method calculates a random number for customers per hour and multiples that by avg. cookie sales and returns and array with those two values.
-  randomCustomer: function() {
+      hourlySum = hourlySum + storeList[j].cookiesPerHour[i];
 
-    var customers = Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1) + this.minCustomer);
-    // console.log(customers)
-    var cookies = Math.floor(customers * this.avgCookies);
-    // console.log(cookies);
-    var hourlyTotals = [customers, cookies];
-    return hourlyTotals;
-    
-  } ,
-
-  //This method will take the values from the 'randomCustomer()' method and runs them through a loop for each hour the store is open and stores them in an array. Loops through and adds the sum of those values. The result is 2 arrays, one for total customers and one for total cookie sales, and two sums for their respective types.
-  salesData: function() {
-
-      for (var i = 0; i < this.hoursOpen; i++) {
-        var salesTotals = this.randomCustomer();
-        
-          this.totalCustomers.push(salesTotals[0]);
-          this.customerSum = (this.customerSum + salesTotals[0]);
-          
-          this.totalCookies.push(salesTotals[1]);
-          this.cookieSum = (this.cookieSum + salesTotals[1]);
-      }
-  },
-  //This method will create a list and write the stored data into a list.
-  write: function() {
-    var listEl = document.getElementById('list');
-    var salesList = document.createElement('ul');
-    var itemEl = document.createElement('li');
-    var nameEl = document.createElement('p');
-      nameEl.textContent = this.name;
-      itemEl.appendChild(nameEl);
-      listEl.appendChild(itemEl);
-      listEl.appendChild(salesList);
-
-    for (var i = 0; i < this.totalCookies.length; i++) {
-      var hourEl = document.createElement('li');
-      salesList.appendChild(hourEl);
-      hourEl.textContent = this.totalCookies[i];
     }
 
-    var sumEl = document.createElement('li');
-    sumEl.textContent = 'total : ' + this.cookieSum;
-    salesList.appendChild(sumEl);
+    footerCell.textContent = hourlySum;
+    footerRow.appendChild(footerCell)
+    dailySum = dailySum + hourlySum;
 
   }
+
+  footerCell = document.createElement('td');
+  footerCell.textContent = ('Company Total: ' + dailySum);
+  footerRow.appendChild(footerCell);
+  footer.appendChild(footerRow);
+  
 }
-
-limaStore.salesData();
-limaStore.write();
-
+//These are the instances for each individual store created from the constructor function using the 'new' keyword
+createTableHeader();
+var seattleStore = new NewStore('Seattle', 23, 65, 6.3);
+var tokyoStore = new NewStore('Tokyo', 3, 24, 1.2);
+var dubaiStore = new NewStore('Dubai', 11, 38, 3.7);
+var parisStore = new NewStore('Paris', 20, 38, 2.3);
+var limaStore = new NewStore('Lima', 2, 16, 4.6);
+createTableFooter();
