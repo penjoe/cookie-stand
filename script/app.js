@@ -7,7 +7,7 @@ var storeList = [];
 var hoursOpen = 14;
 
 //Array of strings for each hour the store is open that will be used to write onto the table header cells 
-var hoursofOperation = ['6:00am','7:00am','8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm'];
+var hoursOfOperation = ['6:00am','7:00am','8:00am','9:00am','10:00am','11:00am','12:00pm','1:00pm','2:00pm','3:00pm','4:00pm','5:00pm','6:00pm','7:00pm'];
 
 //This constructor function will create a template from which I can make any number of store locations by creating an instance for each desired store
 
@@ -94,11 +94,21 @@ function createTableHeader() {
   var header = document.getElementById('sales-table');
   var headerRow = document.createElement('tr');
   var headerCell = document.createElement('td');
-  headerCell.textContent = 'Hours Of Operation';
+  
+  headerRow.appendChild(headerCell);
 
-  for (var i = 0 ; i < (hoursOfOperation.length +2) ; i++) {
+  //Loops through array with each hour open as a string and adds that string to a cell
+  for (var i = 0 ; i <= (hoursOfOperation.length) ; i++) {
+
+    headerCell = document.createElement('td');
+    headerCell.textContent = hoursOfOperation[i];
+    headerRow.appendChild(headerCell);
 
   }
+
+  headerCell.textContent = 'Hourly Sales Totals';
+  header.appendChild(headerRow);
+  headerRow.appendChild(headerCell);
 
 }
 
@@ -121,10 +131,14 @@ function createTableFooter() {
     }
   }
 
+  
+
 }
 //These are the instances for each individual store created from the constructor function using the 'new' keyword
+createTableHeader();
 var seattleStore = new NewStore('Seattle', 23, 65, 6.3);
 var tokyoStore = new NewStore('Tokyo', 3, 24, 1.2);
 var dubaiStore = new NewStore('Dubai', 11, 38, 3.7);
 var parisStore = new NewStore('Paris', 20, 38, 2.3);
 var limaStore = new NewStore('Lima', 2, 16, 4.6);
+createTableFooter();
