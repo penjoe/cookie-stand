@@ -17,20 +17,23 @@
 <body>
   <main>
     <!-- This form will allow input of values and return a new row to the table  -->
-    <form id="add-store">
+    <fieldset id="store">
+      <form id="add-store">
+        <fieldset id="text-inputs">
+          <label class="store-input">Store name<input type="text" name="store-name"></label>
 
-      <label>Store name<input type="text" name="store-name"></label>
+          <label class="store-input">Minimum daily customers<input type="text" name="min-cust"></label>
 
-      <label>Minimum daily customers<input type="text" name="min-cust"></label>
+          <label class="store-input">Maximum daily customers<input type="text" name="max-cust"></label>
 
-      <label>Maximum daily customers<input type="text" name="max-cust"></label>
-
-      <label>Average cookies sold per customer<input type="text" name="avg-cookies"></label>
-
-      <input type="submit" name="creat-a-store" value="Create a store!">
-
-    </form>
-
+          <label class="store-input">Average cookies sold per customer<input type="text" name="avg-cookies"></label>
+        
+        </fieldset>
+        
+        <input type="submit" name="creat-a-store" value="Create a store!">
+        
+      </form>
+    </fieldset>
     <!-- this 'div' holds the table that gets input through the DOM -->
     <div id="sales-table">
 
