@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pat's Salmon Cookies</title>
+  <link rel="stylesheet" href="style/reset.css">
   <link rel="stylesheet" href="style/style.css">
 </head>
 <header>
@@ -16,6 +17,38 @@
 </header>
 <body>
   <main>
+    <!-- This form will allow input of values and return a new row to the table  -->
+    <fieldset id="store">
+      <form id="add-store">
+        <fieldset id="text-inputs">
+
+          <label class="store-input">
+            Store name
+            <input placeholder="Location" type="text" name="storeName">
+          </label>
+
+          <label class="store-input">
+            Minimum daily customers
+            <input placeholder="Minimum Customers" type="text" name="minCust">
+          </label>
+
+          <label class="store-input">
+            Maximum daily customers
+            <input placeholder="MaximumCustomers" type="text" name="maxCust">
+          </label>
+
+          <label class="store-input">
+            Average cookies sold per customer
+            <input placeholder="Average Sale" type="text" name="avgCookies">
+          </label>
+        
+          <input id ="submit-button" type="submit" name="create-a-store" value="Create a store!">
+        </fieldset>
+        
+        
+      </form>
+    </fieldset>
+    <!-- this 'div' holds the table that gets input through the DOM -->
     <div id="sales-table">
 
     </div>
