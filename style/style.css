@@ -2,7 +2,8 @@ body {
   background-color: salmon;
   width: 1200px;
   margin: auto;
-  font-family: 'Trocchi', serif;}
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
 h1 {
   font-size: 36px;
@@ -47,14 +48,35 @@ hr {
 }
 
 #about-us {
-  margin-top: 10px;
   font-size: 18px;
   margin: 10px auto;
   width: 750px;
 }
 
-#main-content {
+h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
 
+#main-content {
+  /* display: inline-block; */
+}
+
+#main-left {
+  
+  display: inline-block;
+  width: 300px;
+  margin: 10px auto;
+}
+
+#main-right {
+  display: inline-block;
+  width: 650px;
+  margin: 10x 10px 0px 600px;
+}
+
+#frosted {
+  width: 250px;>
 }
 
 #store {
@@ -126,4 +148,8 @@ td {
 
 td:last-child {
   background-color: rgb(212, 66, 97);
+}
+
+#copyright {
+  text-align: center;
 }
