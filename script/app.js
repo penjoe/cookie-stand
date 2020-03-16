@@ -77,10 +77,10 @@ NewStore.prototype.createTable = function() {
   rowEl.appendChild(cellEl);
 
   // This loops will create 14 cells per row
-  for (var cookiesSold = 0 ;  cookiesSold < this.cookiesPerHour.length ; cookiesSold++) {
+  for (var i = 0 ;  i < this.cookiesPerHour.length ; i++) {
 
     cellEl = document.createElement('td');
-    cellEl.textContent = this.cookiesPerHour[cookiesSold];
+    cellEl.textContent = this.cookiesPerHour[i];
     rowEl.appendChild(cellEl);
   }
 

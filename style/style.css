@@ -1,23 +1,47 @@
 body {
   background-color: salmon;
+  width: 1200px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 36px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 img {
   display: block;
   margin: 10px auto;
+  width: 550px;
 }
 
-nav {
-  
+a {
+  border-radius: 10px;
+  margin: 15px 10px 15px 10px;
+  padding: 9px;
+  font-size: 20px;
+  background-color: lightgrey;
 }
 
 ul {
   list-style-type: none;
 }
 
+li {
+  display: inline-block;
+  margin: 10px 15px;
+}
+
 header{
   background-color: white;
   text-align: center;
+  margin: 25px 0px;
+}
+
+#about-us {
+  font-size: 18px;
+  margin: 10px auto;
+  width: 750px;
 }
 
 #store {
@@ -27,8 +51,10 @@ header{
   height: 150px;
 }
 
-#text-inputs {
-  
+#store {
+  border-radius: 10px;
+  margin: 20px auto;
+  align-content: 
 }
 
 .store-input {
@@ -38,7 +64,24 @@ header{
 
 #sales-table {
   display: inline-block;
-  margin: 20px auto;
+  margin: auto;
+}
+
+.form-input {
+  border-radius: 10px;
+  background-color: rgb(245, 241, 202);
+}
+
+#submit-button {
+  margin: 3px auto;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+#submit-button:hover {
+  border-radius: 10px;
+  background-color: red;
+
 }
 
 table {
@@ -50,6 +93,10 @@ table {
 
 tr {
   padding: 20px;
+}
+
+tr:hover td { 
+  background-color: yellow;
 }
 
 td:nth-child(odd) {
