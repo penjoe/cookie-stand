@@ -2,11 +2,12 @@ body {
   background-color: salmon;
   width: 1200px;
   margin: auto;
-}
+  font-family: 'Trocchi', serif;}
 
 h1 {
   font-size: 36px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Permanent Marker', cursive;
+  text-decoration: underline;
 }
 
 img {
@@ -16,6 +17,7 @@ img {
 }
 
 a {
+  font-family: 'Trocchi', serif;
   border-radius: 10px;
   margin: 15px 10px 15px 10px;
   padding: 9px;
@@ -36,12 +38,23 @@ header{
   background-color: white;
   text-align: center;
   margin: 25px 0px;
+  padding-bottom: 10px;
+}
+
+hr {
+  background-color: black;
+  size: solid;
 }
 
 #about-us {
+  margin-top: 10px;
   font-size: 18px;
   margin: 10px auto;
   width: 750px;
+}
+
+#main-content {
+
 }
 
 #store {
@@ -52,6 +65,7 @@ header{
 }
 
 #store {
+  font-family: Arial, Helvetica, sans-serif;
   border-radius: 10px;
   margin: 20px auto;
   align-content: 
@@ -63,6 +77,7 @@ header{
 }
 
 #sales-table {
+  font-family: Arial, Helvetica, sans-serif;
   display: inline-block;
   margin: auto;
 }
@@ -92,19 +107,23 @@ table {
 }
 
 tr {
-  padding: 20px;
+  padding: 15px;
 }
 
 tr:hover td { 
   background-color: yellow;
 }
-/* tr:nth-child(3) td:nth-child(2) */
+
 td:nth-child(odd) {
   background-color: lightgrey;
 }
 
 td {
   background-color: grey;
-  padding: 10px;
+  padding: 5px;
   border:1px solid black;
+}
+
+td:last-child {
+  background-color: rgb(212, 66, 97);
 }
