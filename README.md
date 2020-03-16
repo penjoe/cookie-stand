@@ -5,6 +5,9 @@ This is the infamous Salmon Cookies project, week 2 project for Code Fellows Cod
 Update: 
 Replaced object literals with a single constructor function. Constructor now creates a table on the sales.html page instead of a list with each stores individual data when each store's instance is created. Separate functions in the js file to add a header and footer to the table with store hours and sales totals.
 
+Update: 
+A form has been added that allows new data to be taken in and added to the table as a new store. CSS styling has been added.
+
 ## Built With
 HTML5 - web framework
 CSS3 - front end styling
