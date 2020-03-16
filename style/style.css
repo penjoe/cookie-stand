@@ -98,7 +98,7 @@ tr {
 tr:hover td { 
   background-color: yellow;
 }
-
+/* tr:nth-child(3) td:nth-child(2) */
 td:nth-child(odd) {
   background-color: lightgrey;
 }
